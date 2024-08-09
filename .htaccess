@@ -1,0 +1,12 @@
+RewriteEngine On
+
+
+# Rediriger les requêtes vers les fichiers PHP s'ils existent
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Rediriger les requêtes vers l'index.php pour l'application MVC
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
